@@ -84,6 +84,16 @@ const printBuffer = options => logBuffer => {
     logBuffer.length = 0;
 };
 
+const isAllowed = (action, filter) => {
+    if (!filter) {
+        return true;
+    }
+    if (filter.whitelist && filter.whitelist.length) {
+        return filter.whitelist.indexOf(action.type);
+    }
+    return filter.blacklist && filter.blacklist.indexOf(action.type) === -1;
+};
+
 export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
     let log = {};
     const ua = typeof window !== 'undefined' && window.navigator.userAgent ? window.navigator.userAgent : '';
@@ -103,6 +113,10 @@ export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
         timestamp : true,
         stateTransformer : state => state,
         actionTransformer : actn => actn,
+        filter : {
+            whitelist : [],
+            blacklist : []
+        },
         colors : ms_ie ? {} : {
             title: null,
             prevState: () => `#9E9E9E`,
@@ -132,7 +146,7 @@ export const storeLogger = (opts : Object = {}) => (reducer : Function) => {
         };
         log = Object.assign({}, preLog, postLog);
         //ignore init action fired by store and devtools
-        if(action.type !== INIT_ACTION) {
+        if(action.type !== INIT_ACTION && isAllowed(action, options.filter)) {
             buffer([log]);
         }
 

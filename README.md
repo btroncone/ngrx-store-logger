@@ -56,6 +56,10 @@ interface LoggerOptions {
     collapsed? : boolean; //Should log group be collapsed? default: false
     duration? : boolean; //Print duration with action? default: true
     timestamp? : boolean; //Print timestamp with action? default: true
+    filter?: {
+      whitelist?: string[], // Only print actions included in this list - has priority over blacklist
+      blacklist?: string[] // Only print actions that are NOT included in this list
+    }
     stateTransformer? : (state : Object) => Object; //Transform state before print default: state => state
     actionTransformer? : (actn : Object) => Object; //Transform action before print default: actn => actn
     colors? : {
