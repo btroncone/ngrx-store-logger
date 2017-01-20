@@ -89,7 +89,7 @@ const isAllowed = (action, filter) => {
         return true;
     }
     if (filter.whitelist && filter.whitelist.length) {
-        return filter.whitelist.indexOf(action.type);
+        return filter.whitelist.indexOf(action.type) !== -1;
     }
     return filter.blacklist && filter.blacklist.indexOf(action.type) === -1;
 };
