@@ -12,7 +12,7 @@ npm install ngrx-store-logger --save
 ```
 **UPDATED FOR NGRX 4**
 1. Import `ngrx-store-logger`
-2. Wrap in a function 
+2. Wrap in an exported function
 3. Include in your meta-reducers in `StoreModule.forRoot` call.
 
 ```ts
@@ -100,4 +100,4 @@ storeLogger(options) : Reducer
 ```
 With this setup, all actions except *set-value* will be printed
 
-*Note*: Whitelist has predence over blacklist. If both are defined, only whitelist will be considered
+*Note*: Whitelist takes precedence over blacklist. If both are defined, only whitelist will be considered
