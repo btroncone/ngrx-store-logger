@@ -154,6 +154,7 @@ const isAllowed = (action, filter) => {
   if (!filter) {
     return true;
   }
+  if(typeof filter === 'function') return filter(action.type);
   if (filter.whitelist && filter.whitelist.length) {
     return filter.whitelist.indexOf(action.type) !== -1;
   }
@@ -256,7 +257,7 @@ export interface LoggerOptions {
    * Print timestamp with action? default: true
    */
   timestamp?: boolean;
-  filter?: LoggerFilterOption;
+  filter?: LoggerFilterOption | ActionFilter;
   /**
    * Transform state before print default: state => state
    */
@@ -268,15 +269,16 @@ export interface LoggerOptions {
   colors?: LoggerColorsOption;
 }
 
+export type ActionFilter = (type: string) => boolean;
 export interface LoggerFilterOption {
   /**
    * Only print actions included in this list - has priority over blacklist
    */
-  whitelist?: string[];
+  whitelist?: Array<string>;
   /**
    * Only print actions that are NOT included in this list
    */
-  blacklist?: string[];
+  blacklist?: Array<string>;
 }
 
 export interface LoggerColorsOption {
