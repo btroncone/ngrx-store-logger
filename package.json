@@ -1,6 +1,6 @@
 {
   "name": "ngrx-store-logger",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Advanced logging middleware for @ngrx/store",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,7 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/btroncone/ngrx-store-logger.git"
   },
-  "keywords": ["redux", "ngrx", "store", "logger", "middleware", "rxjs"],
+  "keywords": [
+    "redux",
+    "ngrx",
+    "store",
+    "logger",
+    "middleware",
+    "rxjs"
+  ],
   "author": "Brian Troncone",
   "license": "MIT",
   "bugs": {
